@@ -1,15 +1,11 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import './App.css'
-import {graphql} from '../src/gql';
-import { FragmentType, useFragment } from '../src/gql/fragment-masking'
+import {graphql, FragmentType, useFragment} from './gql';
 
 import {useQuery} from "urql";
 
 import {GhReposDocument} from "./gql/graphql.ts";
-
 //import {useGhReposQuery} from "./gql/graphql.ts";
-
-
 
 export const RepoFragment = graphql(/* GraphQL */ `
     fragment RepoItem on Repository {
@@ -64,8 +60,8 @@ function App() {
             <div>
                 <h1>Popular repositories on GitHub for @{result.data?.viewer.login}</h1>
                 <div>
-                    {repositories.filter(isDefined).map((repo) => (
-                        <Repo repo={repo} key={repo.nameWithOwner} />
+                    {repositories.filter(isDefined).map((repo, index) => (
+                        <Repo repo={repo} key={index} />
                     ))}
                 </div>
                 <div dangerouslySetInnerHTML={{__html: result.data?.viewer.bioHTML}} />

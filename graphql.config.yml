@@ -1,0 +1,3 @@
+name: "Github Graphql"
+schema: "src/gql/remote-schema.graphql"
+

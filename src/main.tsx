@@ -11,6 +11,7 @@ import { devtoolsExchange } from '@urql/devtools';
 const GITHUB_PERSONAL_ACCESS_TOKEN = import.meta.env.VITE_GITHUB_ACCESS_TOKEN || "";
 
 const auth_header = `Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}`;
+
 const client = createClient({
     url: 'https://api.github.com/graphql',
     exchanges: [

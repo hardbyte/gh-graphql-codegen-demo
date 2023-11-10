@@ -9,11 +9,11 @@ const config: CodegenConfig = {
     './src/gql/': {
       preset: 'client',
       config: {
-
+        //documentMode: 'string',
       },
       plugins: [
-      // 'typescript',
-      //'typescript-operations',
+        // 'typescript',
+        // 'typescript-operations',
       //'typescript-urql'
       ],
     },
