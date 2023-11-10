@@ -1,0 +1,14 @@
+
+query ghRepos {
+    viewer {
+        login
+        bioHTML
+        repositories(first: 10, orderBy: { field: STARGAZERS, direction: DESC } ) {
+            totalCount
+            totalDiskUsage
+            nodes {
+                ...RepoItem
+            }
+        }
+    }
+}
