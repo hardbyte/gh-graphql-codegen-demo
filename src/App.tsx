@@ -1,10 +1,11 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import './App.css'
-import {graphql, FragmentType, useFragment} from './gql';
+import {graphql, FragmentType, getFragmentData} from './gql';
 
 import {useQuery} from "urql";
 
 import {GhReposDocument} from "./gql/graphql.ts";
+import {Avatar, AvatarGroup, Button, Card, CardContent, CardHeader} from "@mui/material";
 //import {useGhReposQuery} from "./gql/graphql.ts";
 
 export const RepoFragment = graphql(/* GraphQL */ `
@@ -12,19 +13,36 @@ export const RepoFragment = graphql(/* GraphQL */ `
         nameWithOwner
         url
         stargazerCount
+        stargazers(first: 50, orderBy: { field: STARRED_AT, direction: DESC }) {
+            edges {
+                starredAt
+                node {
+                    name
+                    avatarUrl
+                }
+            }
+            
+        }
       }
 `)
 
 const Repo = (props: {
   repo: FragmentType<typeof RepoFragment>
 }) => {
-  const repo = useFragment( RepoFragment, props.repo);
+
+  const repo = getFragmentData( RepoFragment, props.repo);
 
   return (
-      <div key={repo.url}>
-          <a href={repo.url}>{repo.nameWithOwner}</a> ({repo.stargazerCount}{' '}
-          stars)
-      </div>
+      <Card key={repo.url} >
+          <CardHeader title={<a href={repo.url}>{repo.nameWithOwner}</a>} />
+          <CardContent>
+              <h4>{repo.stargazerCount} Stargazers!</h4>
+              <AvatarGroup max={50} >
+                  {repo.stargazers.edges?.map(s =>
+                      <Avatar src={s?.node.avatarUrl} alt={s?.node.name ?? ''} key={s?.node.name}/>)}
+              </AvatarGroup>
+          </CardContent>
+      </Card>
   )
 }
 
@@ -68,9 +86,9 @@ function App() {
             </div>
 
             <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
+                <Button variant="contained" onClick={() => setCount((count) => count + 1)}>
                     count is {count}
-                </button>
+                </Button>
 
             </div>
 

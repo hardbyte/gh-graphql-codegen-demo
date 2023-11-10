@@ -11,10 +11,13 @@ const config: CodegenConfig = {
       config: {
         //documentMode: 'string',
       },
+      presetConfig: {
+        fragmentMasking: { unmaskFunctionName: 'getFragmentData' }
+      },
       plugins: [
         // 'typescript',
         // 'typescript-operations',
-      //'typescript-urql'
+        //'typescript-urql'
       ],
     },
 
