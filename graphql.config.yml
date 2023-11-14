@@ -1,3 +1,9 @@
 name: "Github Graphql"
-schema: "src/gql/remote-schema.graphql"
-
+#schema: "src/gql/remote-schema.graphql"
+schema:
+  # Public schema:
+  #- https://docs.github.com/public/schema.docs.graphql:
+  # authenticated schema
+  - https://api.github.com/graphql:
+      headers:
+        Authorization: Bearer ${TOKEN}
