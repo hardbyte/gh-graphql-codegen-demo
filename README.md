@@ -1,6 +1,17 @@
-# React + TypeScript + Vite
+# React + TypeScript + GraphQL
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This demo provides a minimal example to get React working with fully typed graphql
+queries using urql following current recommendations.
+
+
+Set the `VITE_GITHUB_ACCESS_TOKEN` environment variable, run code gen, then
+start the dev server.
+
+    npm run codegen
+    npm run dev
+
+
+## Original Vite React Readme
 
 Currently, two official plugins are available:
 

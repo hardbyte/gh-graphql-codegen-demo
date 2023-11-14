@@ -1,55 +1,15 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import './App.css'
-import {graphql, FragmentType, getFragmentData} from './gql';
 
 import {useQuery} from "urql";
 
 import {GhReposDocument} from "./gql/graphql.ts";
-import {Avatar, AvatarGroup, Button, Card, CardContent, CardHeader} from "@mui/material";
+import {Button} from "@mui/material";
+import {Repo} from "./repo.tsx";
+import {isDefined} from "./utils.ts";
+
 //import {useGhReposQuery} from "./gql/graphql.ts";
 
-export const RepoFragment = graphql(/* GraphQL */ `
-    fragment RepoItem on Repository {
-        nameWithOwner
-        url
-        stargazerCount
-        stargazers(first: 50, orderBy: { field: STARRED_AT, direction: DESC }) {
-            edges {
-                starredAt
-                node {
-                    name
-                    avatarUrl
-                }
-            }
-            
-        }
-      }
-`)
-
-const Repo = (props: {
-  repo: FragmentType<typeof RepoFragment>
-}) => {
-
-  const repo = getFragmentData( RepoFragment, props.repo);
-
-  return (
-      <Card key={repo.url} >
-          <CardHeader title={<a href={repo.url}>{repo.nameWithOwner}</a>} />
-          <CardContent>
-              <h4>{repo.stargazerCount} Stargazers!</h4>
-              <AvatarGroup max={50} >
-                  {repo.stargazers.edges?.map(s =>
-                      <Avatar src={s?.node.avatarUrl} alt={s?.node.name ?? ''} key={s?.node.name}/>)}
-              </AvatarGroup>
-          </CardContent>
-      </Card>
-  )
-}
-
-
-function isDefined<T>(value: T | null | undefined): value is T {
-  return value !== null && value !== undefined;
-}
 
 function App() {
     const [count, setCount] = useState(0)
