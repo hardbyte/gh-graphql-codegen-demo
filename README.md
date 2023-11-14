@@ -1,7 +1,7 @@
 # React + TypeScript + GraphQL
 
 This demo provides a minimal example to get React working with fully typed graphql
-queries using urql following current recommendations.
+queries using urql following [current recommendations](https://www.the-guild.dev/blog/unleash-the-power-of-fragments-with-graphql-codegen).
 
 
 Set the `VITE_GITHUB_ACCESS_TOKEN` environment variable, run code gen, then

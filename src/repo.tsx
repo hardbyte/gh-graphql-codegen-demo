@@ -31,8 +31,8 @@ export const Repo = (props: {
       <CardContent>
         <h4>{repo.stargazerCount} Stargazers!</h4>
         <AvatarGroup max={50}>
-          {repo.stargazers.edges?.map(s =>
-            <Avatar src={s?.node.avatarUrl} alt={s?.node.name ?? ''} key={s?.node.name}/>)}
+          {repo.stargazers.edges?.map((s, index) =>
+            <Avatar src={s?.node.avatarUrl} alt={s?.node.name ?? ''} key={index}/>)}
         </AvatarGroup>
       </CardContent>
     </Card>
