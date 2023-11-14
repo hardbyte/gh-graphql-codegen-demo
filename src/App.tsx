@@ -1,25 +1,22 @@
 import {useState} from 'react'
 import './App.css'
 
-import {useQuery} from "urql";
-
-import {GhReposDocument} from "./gql/graphql.ts";
 import {Button} from "@mui/material";
 import {Repo} from "./repo.tsx";
 import {isDefined} from "./utils.ts";
 
-//import {useGhReposQuery} from "./gql/graphql.ts";
+import {useGhReposQuery} from "./gql/graphql.ts";
 
 
 function App() {
     const [count, setCount] = useState(0)
 
     // // URQL hook for getting GitHub repositories with star count
-    const [result] = useQuery({
-        query: GhReposDocument,
-    })
+    // const [result] = useQuery({
+    //     query: GhReposDocument,
+    // })
 
-    // const [result] = useGhReposQuery();
+    const [result] = useGhReposQuery();
 
     // Error handling
     if (result.error) {
